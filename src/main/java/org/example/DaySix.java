@@ -2,9 +2,7 @@ package org.example;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -28,23 +26,28 @@ public class DaySix {
             fishCounts.put(fish, fishCounts.getOrDefault(fish, 0L) + 1L);
         }
         partOne(fishCounts);
+        partTwo(fishCounts);
     }
+    public static void partOne(HashMap<Long, Long> startingFishCount) {
+        HashMap<Long, Long> workingFishCount = new HashMap<>(startingFishCount);
+        addFish(workingFishCount, 80);
+        System.out.println(workingFishCount.values().stream().reduce(0L, Long::sum));
+    }
+    public static void partTwo(HashMap<Long, Long> startingFishCount) {
+        HashMap<Long, Long> workingFishCount = new HashMap<>(startingFishCount);
+        addFish(workingFishCount, 256);
+        System.out.println(workingFishCount.values().stream().reduce(0L, Long::sum));
+    }
+
     //So, suppose you have a lanternfish with an internal timer value of 3:
     //
     //    After one day, its internal timer would become 2.
     //    After another day, its internal timer would become 1.
     //    After another day, its internal timer would become 0.
-    //    After another day, its internal timer would reset to 6, and it would create a new lanternfish with an internal timer of 8.
-    //    After another day, the first lanternfish would have an internal timer of 5, and the second lanternfish would have an internal timer of 7.
-    public static void partOne(HashMap<Long, Long> startingFishCount) {
-        HashMap<Long, Long> workingFishCount = new HashMap<>(startingFishCount);
-        addFish(workingFishCount, 256);
-        System.out.println(workingFishCount.values().stream().reduce(0L, Long::sum));
-    }
-    public static void partTwo() {
-        // noop
-        // same thing as part one just updated the hashmap to <Long, Long> from <Integer Integer>;
-    }
+    //    After another day, its internal timer would reset to 6,
+    //    and it would create a new lanternfish with an internal timer of 8.
+    //    After another day, the first lanternfish would have an internal timer of 5,
+    //    and the second lanternfish would have an internal timer of 7.
     public static HashMap<Long, Long> addFish(HashMap<Long, Long> workingFishCount, int counter) {
         if (counter == 0) {
             return workingFishCount;

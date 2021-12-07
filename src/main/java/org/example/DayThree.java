@@ -9,8 +9,10 @@ public class DayThree {
     public static void main(String[] args) throws IOException {
         File file = new File("E:\\IntelliJ\\AdventOfCode2021\\src\\main\\resources\\DayThree.txt");
         Scanner sc = new Scanner(file);
-        int[] oneCounts = new int[]{0,0,0,0,0,0,0,0,0,0,0,0};
-        int[] zeroCounts = new int[]{0,0,0,0,0,0,0,0,0,0,0,0};
+        int[] oneCounts = new int[12];
+        Arrays.fill(oneCounts, 0);
+        int[] zeroCounts = new int[12];
+        Arrays.fill(zeroCounts, 0);
         while(sc.hasNextLine()) {
             String bits = sc.next();
             for (int i = 0; i < oneCounts.length; i++) {
@@ -23,8 +25,10 @@ public class DayThree {
             }
         }
 
-        int[] gamma = new int[]{0,0,0,0,0,0,0,0,0,0,0,0};
-        int[] epsilon = new int[]{0,0,0,0,0,0,0,0,0,0,0,0};
+        int[] gamma = new int[12];
+        Arrays.fill(gamma, 0);
+        int[] epsilon = new int[12];
+        Arrays.fill(epsilon, 0);
         for (int i = 0; i < epsilon.length; i++) {
             if (oneCounts[i] == zeroCounts[i]) {
                 System.out.println("They equalled! at position " + i);
@@ -38,8 +42,10 @@ public class DayThree {
                 epsilon[i] = 1;
             }
         }
-        System.out.println(Arrays.toString(gamma) +  " " + Arrays.toString(epsilon)); // 2601 1494
-        System.out.println(2601 * 1494);
+        int translatedBinaryGamma = Integer.parseInt(Arrays.stream(gamma).mapToObj(String::valueOf).collect(Collectors.joining("")), 2);
+        int translatedBinaryEpsilon = Integer.parseInt(Arrays.stream(epsilon).mapToObj(String::valueOf).collect(Collectors.joining("")), 2);
+        System.out.println(translatedBinaryGamma +  " and " + translatedBinaryEpsilon); // 2601 1494
+        System.out.println(translatedBinaryEpsilon * translatedBinaryGamma);
         partTwo(new Scanner(file));
     }
     public static void partTwo(Scanner scanner) {
@@ -49,11 +55,10 @@ public class DayThree {
         }
         List<String> cO2Answer = List.copyOf(oxygenAnswer);
 
-
             List<String> oxygen = checkCurrentList(oxygenAnswer, 0, true); // 7551
             List<String> co2 = checkCurrentList(cO2Answer, 0, false); // 1159
 
-       System.out.println("Answer is " + Integer.parseInt(oxygen.get(0), 2) * Integer.parseInt(co2.get(0), 2)); // 4375225?
+       System.out.println("Answer for part two is is " + Integer.parseInt(oxygen.get(0), 2) * Integer.parseInt(co2.get(0), 2)); // 4375225?
     }
     public static List<String> checkCurrentList(List<String> theList, int location, boolean isOxygen) {
         if (location > theList.get(0).length()) {
@@ -66,7 +71,6 @@ public class DayThree {
                     .filter(item -> item.charAt(location) != checkForThisAtLocation)
                     .collect(Collectors.toList());
             if (theList.size() == 1) {
-                System.out.println("We did it afterwards! " + theList.get(0));
                 return theList;
             }
             return checkCurrentList(theList, location+1, isOxygen);

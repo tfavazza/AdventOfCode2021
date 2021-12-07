@@ -8,6 +8,7 @@ import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+// tried making a BingoBoard object to make things easier... i'm not sure that it did...
 public class DayFour {
 public static void main(String[] args) throws FileNotFoundException {
     File file = new File("E:\\IntelliJ\\AdventOfCode2021\\src\\main\\resources\\DayFour.txt");
@@ -89,7 +90,7 @@ public static void partOne(List<BingoBoard> boardList, ArrayList<String> bingoNu
             BingoBoard aWinner = aWinnerMaybe.get(0);
             printTheWinner(aWinner);
             int sum = aWinner.getSumOfCurrentlyUnmarked();
-            System.out.println("winning total for part one is " + sum * Integer.parseInt(bingoNumbers.get(i)));
+            System.out.println("Winning total for part one is " + sum * Integer.parseInt(bingoNumbers.get(i)));
             break;
         }
     }

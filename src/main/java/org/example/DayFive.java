@@ -127,9 +127,9 @@ public class DayFive {
                 startingCoordinate = coordinate[2];
             }
         }
-        List<String> something =
+        List<String> positionsToAdd =
         additionsToMap(fillIn, startingCoordinate, unchangedCoordinate, isHorizontal);
-               something.forEach(attTo -> ventPointsAndCounts.put(attTo, ventPointsAndCounts.getOrDefault(attTo, 0) + 1));
+               positionsToAdd.forEach(attTo -> ventPointsAndCounts.put(attTo, ventPointsAndCounts.getOrDefault(attTo, 0) + 1));
     }
 
     private static List<String> additionsToMap(int fillIn, int startingCoordinate, int unchangedCoordinate, boolean horizontal) {
